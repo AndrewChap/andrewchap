@@ -1,0 +1,92 @@
+@import url(https://fonts.googleapis.com/css?family=Raleway:400,600,400italic,600italic); 
+
+body {
+    background-position: 0px 0px;
+    background: url("../images/dpp_background.png");
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+ul.topnav {
+    list-style-type: none;
+    padding: 0;
+    text-align: center;
+    width: 100%;
+    overflow: hidden;
+    display: block;
+}
+
+ul.topnav li {
+    display:inline-block;
+}
+ul.topnav li.title {
+}
+
+ul.topnav li a {
+    display: block;
+    color: #336;
+    text-align: center;
+    padding: 10px 30px;
+    height: 100%;
+    text-decoration: none;
+    font-family: "Raleway", sans-serif;
+    font-size:1.2em;
+    font-weight: bold;
+}
+
+ul.topnav li a:hover:not(.active) {background-color: #EEF;}
+
+ul.topnav li a.active {background-color: #CCE;}
+
+ul.topnav li p {
+    font-family: "Raleway", sans-serif;
+    font-weight: 600;
+    text-align: center;
+    margin: 0;
+}
+ul.topnav li p.name {
+    font-size: 4.0em;
+    color: #447;
+    font-variant: small-caps;
+    letter-spacing:0.04em;
+    line-height: 0.9;
+}
+ul.topnav li p.position {
+    font-size: 1.4em;
+    color: #666;
+    font-weight: 400;
+    letter-spacing:0.20em;
+    line-height: 1.2;
+}
+ul.topnav li p.company{
+    font-size: 1.6em;
+    color: #22A;
+    letter-spacing:0.40em;
+    line-height: 1;
+}
+
+.headerDiv{
+    width: 100%;
+}
+.navDiv{
+    width: 100%;
+}
+.page{
+    padding: 16px;
+    max-width: 600px;
+    margin:0 auto;
+}
+.publications a{
+    display: block;
+    margin-bottom: 0.5em;
+    text-decoration: none;
+}
+/*ul.topnav li.right {float: right;}*/
+
+
+@media screen and (max-width: 600px){
+    ul.topnav li.right, 
+    ul.topnav li {float: none;}
+}
