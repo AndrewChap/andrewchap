@@ -37,139 +37,59 @@
                         <div class="video-container">
                             <iframe src="https://www.youtube.com/embed/dp-McYFkxPQ" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                         </div>
+                        <iframe style="display: inline-block; width: 100%; min-height: 100%; height: 40vh;" src="neuralnp.html"><span style="display: inline-block; width: 0px; overflow: hidden; line-height: 0;" data-mce-type="bookmark" class="mce_SELRES_start">﻿</span></iframe>
                     </td>
                     <td>
                         <h5>
-                            The Continuous Electrode Inertial Electrostatic Confinement (CE-IEC) Fusor
+                            A Simple Neural Network with NumPy
                         </h5>
                         <p>
-                        <iframe style="display: inline-block; width: 100%; min-height: 100%; height: 30vh;" src="http://andrewchap.com/wp-content/uploads/2018/09/neuralnp.html"><span style="display: inline-block; width: 0px; overflow: hidden; line-height: 0;" data-mce-type="bookmark" class="mce_SELRES_start">﻿</span></iframe>
+                        Using NumPy, and with guidance from <a href="http://neuralnetworksanddeeplearning.com/">neuralnetworksanddeeplearning.com</a> and a few other tutorials, I created a simple neural network to learn a two-input/one-output function. The utility of this network doesn't extend beyond an educational demonstration. The training function is:</p>
+                        <img style="width: 350px; display: block; margin-left: auto; margin-right: auto;" src="http://andrewchap.com/wp-content/uploads/2018/09/neuraleq.png">
+                        <p>Using three hidden layers of 40 neurons each, the network is fed two random inputs in (0,1) and the output from the training function is used to determine the error and back-propagate the error. The network is trained with 50,000 epochs of batch sizes of 10,000, after which, the network is able to recreate the output of the function. For copy-and-paste-ability, the code is presented here as a single file.
                         </p>
                     </td>
                 </tr>
                 <tr>
                     <td>
                         <div class="video-container">
-                            <iframe src="https://www.youtube.com/embed/uIXbEQYu094" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            <iframe src="https://www.youtube.com/embed/jpn6KN21fIc" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                         </div>
+                        <iframe style="display: inline-block; width: 100%; min-height: 100%; height: 40vh;" src="neuraltf.html"><span style="display: inline-block; width: 0px; overflow: hidden; line-height: 0;" data-mce-type="bookmark" class="mce_SELRES_start">﻿</span></iframe>
                     </td>
                     <td>
                         <h5>
-                            Simultaneous-turn-based Strategy Game
+                            A Simple Neural Network with TensorFlow
                         </h5>
-			<p>
-			    This was a fun project of mine during one of my summers at NASA: a rudimentary computer game . It is designed to eliminate the drawbacks of both turn-based strategy games (which are not practical for MMO) and real-time strategy games (where multitasking becomes more important than strategy). During each turn, each player gives commands to each of their units, then the commands are executed in a real-time fashion for a set amount of time, then the game is “paused” while players reassess and issue new commands to their units. In this version, the game lasts one turn, and I play as red, issuing commands to units that otherwise default to moving towards and attacking the nearest unit.
-			</p>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="video-container">
-                            <iframe src="https://www.youtube.com/embed/cNyaQkXzAig" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                        </div>
-                    </td>
-                    <td>
-                        <h5>
-                            Hybrid local/global optimizer for an IEC beamline
-                        </h5>
-			<p>
-                            A hybrid optimizer, consisting of a simulated annealing (global) optimizer followed by a Nelder-Mead simpex (local) optimizer, is scaled up over multiple periods. &nbsp;The desired solution is the optimal performance in a steady-state oscillatory mode. However, over a large number of periods, the device performance is highly sensitive to the input parameters, so first a optimal solution is sought over only one period. Then, using this solution as an initial guess, the optimizer restarts optimization over two periods, and continues adding periods in this way until steady-state is reached. The cost function is a combination of the loss rate of ions to the electrodes and the phase space dispersion of the ions in their final state. &nbsp;The input parameters are the electrode voltages at locations along the wall. &nbsp;The simulated annealing optimizer runs first to search for optima not near the current local solution, usually not finding one but occasionally jumping the solution into a new valley. &nbsp;The Nelder-Mead simplex optimizer then follows by refining the current local optimum.
-			</p>
                         <p>
-                            View source code on GitHub: https://github.com/AndrewChap/IEC_Optimization
+                            I translated the above NumPy neural network into TensorFlow to learn the dataflow programming paradigm for machine learning. The training function, network parameters, and visualization code are identical to the NumPy model, while the differences are in the network setup (starting at line 66) and in the network training (starting at line 145). Both networks achieve approximately the same accuracy per epoch, while the TensorFlow model does it about 3x faster for this particular small-scale sample problem.
                         </p>
                     </td>
                 </tr>
                 <tr>
                     <td>
-                        <div class="video-container">
-                            <iframe src="https://www.youtube.com/embed/zGq0lvaYpWA" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                        </div>
+                        <iframe style="display: inline-block; width: 100%; min-height: 100%; height: 30vh;" src="qtailexample.html"></iframe>
+                        <iframe style="display: inline-block; width: 100%; min-height: 100%; height: 30vh;" src="qtail.html"></iframe>
                     </td>
                     <td>
                         <h5>
-                            100-period 2D3V Simnulation of an optimized IEC beamline
+                            qtail.sh - a qsub wrapper with an interactive feel
                         </h5>
-			<p>
-                            Using the results of the optimizer, the simulation is run to 100 periods to both visualize the evolution of the bunch as well as to investigate the slow progression of thermalization.
-			</p>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="video-container">
-                            <iframe src="https://www.youtube.com/embed/BohV5fvg_LY" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                        </div>
-                    </td>
-                    <td>
-                        <h5>
-                            Development of a new Coulomb collision model for plasma simulation 
-                        </h5>
-			<p>
-			    This is an animation of an N-body direct simulation of counterstreaming ion beams for testing of the Coulomb collision model outlined in "<a href="https://journals.aps.org/pre/abstract/10.1103/PhysRevE.95.063209">Coulomb collision model for use in nonthermal plasma simulation</a>" 
-			</p>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="video-container">
-                            <iframe src="https://www.youtube.com/embed/v74VYKGLG1U" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                        </div>
-                    </td>
-                    <td>
-                        <h5>
-                            Simulating kinetic&rarr;electric energy conversion of fusion products
-                        </h5>
-			<p>
-                            Simulation work for the Traveling Wave Direct Energy Converter test article at the  NASA Johnson Space Center led to the design of a spin-off concept for fusion direct energy conversion: the Standing Wave Direct Energy Converter.  In this 2D3V axisymmetric particle-in-cell simulation, Pulsed fusion products (α-particles) enter from the left side.  As the α-particle bunches pass through ring electrodes, a voltage is induced on the electrodes, which are connected in an even/odd configuration in an RLC (resistor-inductor-capacitor) circuit.  The capacitance naturally exists between the simulated electrodes, an inductor is chosen to give the correct resonant frequency, and the resistive load dissipates power. This simulation directly models the conversion of the kinetic energy of the fusion particles into electrical energy.
-			</p>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="video-container">
-                            <iframe src="https://www.youtube.com/embed/ZIMX0PGz31s" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                        </div>
-                    </td>
-                    <td>
-                        <h5>
-                            Not another propellantless propulsion idea
-                        </h5>
-			<p>
-                            Simulation of the reaction of electrons and positrons (hypothesized to generated in the quantum vacuum field) to the E&amp;B fields in a Q-thruster (also known as EM-drive) resonant cavity. The oscillating fields in the cone-shaped cavity result in a net directional thrust on the simulated electrons and positrons, and the equal and opposite force is the proposed mechanism of “propellentless” thrust.
-                        </p>
                         <p>
-                            <a href="https://github.com/AndrewChap/Q-ThrusterSimulation">View source code on GitHub:</a> 
+                        When debugging HPC jobs using the portable batch system (PBS) scheduler, I often logged into a compute node for an interactive session. Unfortunately I found that the terminal window did not always render correctly, making interactivity difficult, and I did not have access to my .bashrc file since I would be put on a different node each time. To solve this I created a function called <tt>qtail</tt>, which is a portmanteau of the <tt>qsub</tt> and <tt>tail</tt> functions. Effectively a wrapper for <tt>qsub</tt>, <tt>qtail</tt> is run with the same syntax and options as <tt>qsub</tt>, but runs tail on the output files generated by <tt>qsub</tt>, and when the <tt>qtail</tt> function is terminated it terminates the corresponding PBS job (by grepping for the job number in the output of <tt>qstat</tt>) to enable quick debugging on the head node with the feel of debugging on an interactive node.
                         </p>
                     </td>
                 </tr>
                 <tr>
                     <td>
-                        <div class="video-container">
-                            <iframe src="https://www.youtube.com/embed/EIHNO1Vz3hA" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                        </div>
+                        <iframe style="display: inline-block; width: 100%; min-height: 100%; height: 30vh;" src="collisions.html"></iframe>
                     </td>
                     <td>
                         <h5>
-                            &ldquo;Billions &amp; Billions...&rdquo;
+                            Binary collisions in CUDA
                         </h5>
-			<p>
-                            Or in this case, thousands. Ions are initialized randomly in a uniform distribution inside a sphere, then allowed to expand due to their mutual Coulomb repulsion. This was used to test parallelization of particle simulation via domain decomposition. Best watched in full-screen 🙂
-                        </p>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="video-container">
-                            <iframe src="https://www.youtube.com/embed/XBjTvkFq_TI" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                        </div>
-                    </td>
-                    <td>
-                        <h5>
-                            Something completely different!
-                        </h5>
-			<p>
-                            Three of me playing a song! No audio tricks here, just camera tricks. Also, its the only video on my website to have audio! 
+                        <p>
+                            This is my CUDA implementation of the non-trivial task of pairing particles on the GPU so as to perform binary Coulomb collisions in parallel.  In this implementation I also calculate the fusion reaction rate, during the particle-pairing process.
                         </p>
                     </td>
                 </tr>
