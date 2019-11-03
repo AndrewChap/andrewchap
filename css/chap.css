@@ -37,6 +37,7 @@ ul.topnav li a {
     color: #77C;
     text-align: center;
     padding: 10px 20px;
+    margin: 0px 10px;
     height: 100%;
     text-decoration: none;
     font-family: "Raleway", sans-serif;
@@ -97,6 +98,7 @@ h5 {
 .mediatable tr td {
     width: 30%;
     height: auto;
+    padding: 40px;
 }
 .video-container {
 	position: relative;
