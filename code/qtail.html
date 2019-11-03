@@ -1,0 +1,210 @@
+<!-- HTML generated using hilite.me -->
+<style>
+td{
+border: 1px solid #BBB;
+padding: 4px;
+}
+</style>
+<!-- HTML generated using hilite.me --><div style="background: #f8f8f8; overflow:auto;width:auto;width:100%; height:100%;"><table><tr><td><pre style="margin: 0; line-height: 125%; color: #999">  1
+  2
+  3
+  4
+  5
+  6
+  7
+  8
+  9
+ 10
+ 11
+ 12
+ 13
+ 14
+ 15
+ 16
+ 17
+ 18
+ 19
+ 20
+ 21
+ 22
+ 23
+ 24
+ 25
+ 26
+ 27
+ 28
+ 29
+ 30
+ 31
+ 32
+ 33
+ 34
+ 35
+ 36
+ 37
+ 38
+ 39
+ 40
+ 41
+ 42
+ 43
+ 44
+ 45
+ 46
+ 47
+ 48
+ 49
+ 50
+ 51
+ 52
+ 53
+ 54
+ 55
+ 56
+ 57
+ 58
+ 59
+ 60
+ 61
+ 62
+ 63
+ 64
+ 65
+ 66
+ 67
+ 68
+ 69
+ 70
+ 71
+ 72
+ 73
+ 74
+ 75
+ 76
+ 77
+ 78
+ 79
+ 80
+ 81
+ 82
+ 83
+ 84
+ 85
+ 86
+ 87
+ 88
+ 89
+ 90
+ 91
+ 92
+ 93
+ 94
+ 95
+ 96
+ 97
+ 98
+ 99
+100
+101</pre></td><td><pre style="margin: 0; line-height: 125%"><span style="color: #408080; font-style: italic">#!/bin/bash</span>
+
+<span style="color: #408080; font-style: italic"># qtail.sh - run just like qsub, but:</span>
+<span style="color: #408080; font-style: italic">#   (1) It also runs tail on the output and error files, so it &quot;feels&quot; like an</span>
+<span style="color: #408080; font-style: italic">#       interactive session</span>
+<span style="color: #408080; font-style: italic">#   (2) If you kill the tail function, it kills the qsub job.  This is useful</span>
+<span style="color: #408080; font-style: italic">#       for debugging.  If it is not desired, either delete the last while</span>
+<span style="color: #408080; font-style: italic">#       loop, or add an option to not perform that loop</span>
+<span style="color: #408080; font-style: italic"># Author: Andrew M. Chap</span>
+<span style="color: #408080; font-style: italic"># Last edited August 2018</span>
+
+<span style="color: #408080; font-style: italic"># Trap function so we kill the qsub job when we kill our qtail function</span>
+<span style="color: #008000; font-weight: bold">function </span>finish <span style="color: #666666">{</span>
+    <span style="color: #008000">echo </span>deleting jobID <span style="color: #19177C">$jobID</span>
+    qdel <span style="color: #19177C">$jobID</span>
+<span style="color: #666666">}</span>
+
+<span style="color: #408080; font-style: italic"># start main function</span>
+<span style="color: #008000; font-weight: bold">function </span>qtail <span style="color: #666666">{</span>
+
+    <span style="color: #408080; font-style: italic"># First argument must be the qsub file</span>
+    <span style="color: #19177C">qsubFile</span><span style="color: #666666">=</span><span style="color: #19177C">$1</span>
+
+    <span style="color: #408080; font-style: italic"># Store the rest of the arguments (including options)</span>
+    <span style="color: #19177C">otherArgs</span><span style="color: #666666">=</span><span style="color: #BA2121">&quot;${@:2}&quot;</span>
+
+    <span style="color: #408080; font-style: italic"># Get the name of the file before the extension via parameter expansion</span>
+    <span style="color: #19177C">qsubName</span><span style="color: #666666">=</span><span style="color: #008000; font-weight: bold">${</span><span style="color: #19177C">qsubFile</span>%%.*<span style="color: #008000; font-weight: bold">}</span>
+    <span style="color: #008000">echo </span>qsubName is <span style="color: #19177C">$qsubName</span>
+    
+    <span style="color: #408080; font-style: italic"># Get the name of the error and output files</span>
+    <span style="color: #008000; font-weight: bold">for </span>errout in err out
+    <span style="color: #008000; font-weight: bold">do</span>
+
+<span style="color: #008000; font-weight: bold">        </span><span style="color: #19177C">flag</span><span style="color: #666666">=</span><span style="color: #BA2121">&quot;-${errout:0:1}&quot;</span> <span style="color: #408080; font-style: italic"># flag for err is &quot;-e&quot; and out is &quot;-o&quot; </span>
+
+        <span style="color: #408080; font-style: italic"># First, look in the passed arguments for -e or -o options</span>
+        <span style="color: #19177C">file</span><span style="color: #666666">=</span><span style="color: #008000; font-weight: bold">$(</span><span style="color: #008000">echo</span> <span style="color: #19177C">$otherArgs</span> | sed -n -e <span style="color: #BA2121">&quot;s|^.*$flag ||p&quot;</span><span style="color: #008000; font-weight: bold">)</span> <span style="color: #408080; font-style: italic"># get everything after flag</span>
+        <span style="color: #19177C">file</span><span style="color: #666666">=</span><span style="color: #008000; font-weight: bold">${</span><span style="color: #19177C">file</span>/%\ */<span style="color: #008000; font-weight: bold">}</span> <span style="color: #408080; font-style: italic"># keep first word only</span>
+
+        <span style="color: #408080; font-style: italic"># If we didn&#39;t find any -e or -o options in arguments, search the qsub file</span>
+        <span style="color: #408080; font-style: italic"># for these arguments</span>
+        <span style="color: #008000; font-weight: bold">if</span> <span style="color: #666666">[</span> -z <span style="color: #BA2121">&quot;$file&quot;</span> <span style="color: #666666">]</span>
+        <span style="color: #008000; font-weight: bold">then</span>
+<span style="color: #008000; font-weight: bold">            </span><span style="color: #19177C">file</span><span style="color: #666666">=</span><span style="color: #008000; font-weight: bold">$(</span>sed -n -e <span style="color: #BA2121">&quot;s|^.*$flag ||p&quot;</span> <span style="color: #19177C">$qsubFile</span><span style="color: #008000; font-weight: bold">)</span>
+        <span style="color: #008000; font-weight: bold">fi</span>
+
+        <span style="color: #408080; font-style: italic"># If we still didn&#39;t find them, then they were unspecified, so we will name</span>
+        <span style="color: #408080; font-style: italic"># them with the same name as the job name</span>
+        <span style="color: #008000; font-weight: bold">if</span> <span style="color: #666666">[</span> -z <span style="color: #BA2121">&quot;$file&quot;</span> <span style="color: #666666">]</span>
+        <span style="color: #008000; font-weight: bold">then</span>
+<span style="color: #008000; font-weight: bold">            </span><span style="color: #19177C">file</span><span style="color: #666666">=</span><span style="color: #19177C">$qsubName</span>.<span style="color: #19177C">$errout</span>
+        <span style="color: #008000; font-weight: bold">fi</span>
+
+        <span style="color: #408080; font-style: italic"># Assign to error file or output file</span>
+        <span style="color: #008000; font-weight: bold">if</span> <span style="color: #666666">[</span> <span style="color: #19177C">$errout</span> <span style="color: #666666">==</span> err <span style="color: #666666">]</span>
+        <span style="color: #008000; font-weight: bold">then</span>
+<span style="color: #008000; font-weight: bold">            </span><span style="color: #19177C">errFile</span><span style="color: #666666">=</span><span style="color: #19177C">$file</span>
+        <span style="color: #008000; font-weight: bold">elif</span> <span style="color: #666666">[</span> <span style="color: #19177C">$errout</span> <span style="color: #666666">==</span> out <span style="color: #666666">]</span>
+        <span style="color: #008000; font-weight: bold">then</span>
+<span style="color: #008000; font-weight: bold">            </span><span style="color: #19177C">outFile</span><span style="color: #666666">=</span><span style="color: #19177C">$file</span>
+        <span style="color: #008000; font-weight: bold">fi        </span>
+
+<span style="color: #008000; font-weight: bold">    done</span>
+
+    <span style="color: #408080; font-style: italic"># if error or output files exist, remove them</span>
+    rm <span style="color: #19177C">$outFile</span> <span style="color: #19177C">$errFile</span> 2&gt; /dev/null
+
+    <span style="color: #408080; font-style: italic"># create error and output files</span>
+    touch <span style="color: #19177C">$outFile</span> <span style="color: #19177C">$errFile</span>
+
+    <span style="color: #19177C">jobOutput</span><span style="color: #666666">=</span><span style="color: #008000; font-weight: bold">$(</span>qsub <span style="color: #19177C">$qsubFile</span> <span style="color: #19177C">$otherArgs</span><span style="color: #008000; font-weight: bold">)</span>
+    <span style="color: #408080; font-style: italic"># ID number of the job is the first number output by the qsub command</span>
+    <span style="color: #19177C">jobID</span><span style="color: #666666">=</span><span style="color: #008000; font-weight: bold">$(</span><span style="color: #008000">echo</span> <span style="color: #19177C">$jobOutput</span> | sed -e <span style="color: #BA2121">&quot;s|\([0-9]\+\).*|\1|&quot;</span><span style="color: #008000; font-weight: bold">)</span>
+    <span style="color: #008000">echo </span>jobID is <span style="color: #19177C">$jobID</span>
+    
+    <span style="color: #408080; font-style: italic"># setup exit trap, so that if we kill this function it kills the qsub job too</span>
+    <span style="color: #008000">trap </span>finish SIGINT EXIT SIGTERM INT
+        
+    <span style="color: #408080; font-style: italic"># Launch tail function as a subshell but redirect output back to stdout</span>
+    <span style="color: #008000">exec </span>3&gt;&amp;1 <span style="color: #408080; font-style: italic"># creates 3 as alias for 1</span>
+
+    <span style="color: #008000; font-weight: bold">$(</span>tail -f <span style="color: #19177C">$outFile</span> -f <span style="color: #19177C">$errFile</span> &gt;&amp;3<span style="color: #008000; font-weight: bold">)</span> &amp; <span style="color: #408080; font-style: italic">#&gt;&amp;3 &amp;  # tail both the out and error files</span>
+
+    <span style="color: #408080; font-style: italic"># get PID of tail so we can terminate it when qsub job is complete</span>
+    <span style="color: #19177C">TAIL_PID</span><span style="color: #666666">=</span><span style="color: #19177C">$!</span> 
+    
+    <span style="color: #408080; font-style: italic"># check every second the status of the job and kill TAIL_PID if the job is complete</span>
+    <span style="color: #19177C">stillRunning</span><span style="color: #666666">=</span>True
+    <span style="color: #008000; font-weight: bold">while</span> <span style="color: #666666">[[</span> <span style="color: #BA2121">&quot;$stillRunning&quot;</span> <span style="color: #666666">==</span> <span style="color: #BA2121">&#39;True&#39;</span> <span style="color: #666666">]]</span>
+    <span style="color: #008000; font-weight: bold">do</span>
+<span style="color: #008000; font-weight: bold">        if </span>qstat <span style="color: #19177C">$jobID</span> | grep <span style="color: #BA2121">&#39; C &#39;</span>
+        <span style="color: #008000; font-weight: bold">then</span>
+<span style="color: #008000; font-weight: bold">            </span><span style="color: #008000">echo </span>job is <span style="color: #008000">complete</span>
+<span style="color: #008000">            kill</span> -9 <span style="color: #19177C">$TAIL_PID</span>
+            <span style="color: #19177C">stillRunning</span><span style="color: #666666">=</span>False
+            <span style="color: #008000">echo </span>qsub <span style="color: #008000">complete</span>
+<span style="color: #008000">        </span><span style="color: #008000; font-weight: bold">fi</span>
+<span style="color: #008000; font-weight: bold">        </span>sleep 1
+    <span style="color: #008000; font-weight: bold">done</span>
+<span style="color: #666666">}</span>
+</pre></td></tr></table></div>
+
