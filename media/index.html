@@ -66,6 +66,119 @@
 			<p>
 			    This was a fun project of mine during one of my summers at NASA: a rudimentary computer game . It is designed to eliminate the drawbacks of both turn-based strategy games (which are not practical for MMO) and real-time strategy games (where multitasking becomes more important than strategy). During each turn, each player gives commands to each of their units, then the commands are executed in a real-time fashion for a set amount of time, then the game is “paused” while players reassess and issue new commands to their units. In this version, the game lasts one turn, and I play as red, issuing commands to units that otherwise default to moving towards and attacking the nearest unit.
 			</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="video-container">
+                            <iframe src="https://www.youtube.com/embed/cNyaQkXzAig" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        </div>
+                    </td>
+                    <td>
+                        <h5>
+                            Hybrid local/global optimizer for an IEC beamline
+                        </h5>
+			<p>
+                            A hybrid optimizer, consisting of a simulated annealing (global) optimizer followed by a Nelder-Mead simpex (local) optimizer, is scaled up over multiple periods. &nbsp;The desired solution is the optimal performance in a steady-state oscillatory mode. However, over a large number of periods, the device performance is highly sensitive to the input parameters, so first a optimal solution is sought over only one period. Then, using this solution as an initial guess, the optimizer restarts optimization over two periods, and continues adding periods in this way until steady-state is reached. The cost function is a combination of the loss rate of ions to the electrodes and the phase space dispersion of the ions in their final state. &nbsp;The input parameters are the electrode voltages at locations along the wall. &nbsp;The simulated annealing optimizer runs first to search for optima not near the current local solution, usually not finding one but occasionally jumping the solution into a new valley. &nbsp;The Nelder-Mead simplex optimizer then follows by refining the current local optimum.
+			</p>
+                        <p>
+                            View source code on GitHub: https://github.com/AndrewChap/IEC_Optimization
+                        </p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="video-container">
+                            <iframe src="https://www.youtube.com/embed/zGq0lvaYpWA" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        </div>
+                    </td>
+                    <td>
+                        <h5>
+                            100-period 2D3V Simnulation of an optimized IEC beamline
+                        </h5>
+			<p>
+                            Using the results of the optimizer, the simulation is run to 100 periods to both visualize the evolution of the bunch as well as to investigate the slow progression of thermalization.
+			</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="video-container">
+                            <iframe src="https://www.youtube.com/embed/BohV5fvg_LY" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        </div>
+                    </td>
+                    <td>
+                        <h5>
+                            Development of a new Coulomb collision model for plasma simulation 
+                        </h5>
+			<p>
+			    This is an animation of an N-body direct simulation of counterstreaming ion beams for testing of the Coulomb collision model outlined in "<a href="https://journals.aps.org/pre/abstract/10.1103/PhysRevE.95.063209">Coulomb collision model for use in nonthermal plasma simulation</a>" 
+			</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="video-container">
+                            <iframe src="https://www.youtube.com/embed/v74VYKGLG1U" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        </div>
+                    </td>
+                    <td>
+                        <h5>
+                            Simulating kinetic&rarr;electric energy conversion of fusion products
+                        </h5>
+			<p>
+                            Simulation work for the Traveling Wave Direct Energy Converter test article at the  NASA Johnson Space Center led to the design of a spin-off concept for fusion direct energy conversion: the Standing Wave Direct Energy Converter.  In this 2D3V axisymmetric particle-in-cell simulation, Pulsed fusion products (α-particles) enter from the left side.  As the α-particle bunches pass through ring electrodes, a voltage is induced on the electrodes, which are connected in an even/odd configuration in an RLC (resistor-inductor-capacitor) circuit.  The capacitance naturally exists between the simulated electrodes, an inductor is chosen to give the correct resonant frequency, and the resistive load dissipates power. This simulation directly models the conversion of the kinetic energy of the fusion particles into electrical energy.
+			</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="video-container">
+                            <iframe src="https://www.youtube.com/embed/ZIMX0PGz31s" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        </div>
+                    </td>
+                    <td>
+                        <h5>
+                            Not another propellantless propulsion idea
+                        </h5>
+			<p>
+                            Simulation of the reaction of electrons and positrons (hypothesized to generated in the quantum vacuum field) to the E&amp;B fields in a Q-thruster (also known as EM-drive) resonant cavity. The oscillating fields in the cone-shaped cavity result in a net directional thrust on the simulated electrons and positrons, and the equal and opposite force is the proposed mechanism of “propellentless” thrust.
+                        </p>
+                        <p>
+                            <a href="https://github.com/AndrewChap/Q-ThrusterSimulation">View source code on GitHub:</a> 
+                        </p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="video-container">
+                            <iframe src="https://www.youtube.com/embed/EIHNO1Vz3hA" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        </div>
+                    </td>
+                    <td>
+                        <h5>
+                            &ldquo;Billions &amp; Billions...&rdquo;
+                        </h5>
+			<p>
+                            Or in this case, thousands. Ions are initialized randomly in a uniform distribution inside a sphere, then allowed to expand due to their mutual Coulomb repulsion. This was used to test parallelization of particle simulation via domain decomposition. Best watched in full-screen 🙂
+                        </p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="video-container">
+                            <iframe src="https://www.youtube.com/embed/XBjTvkFq_TI" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        </div>
+                    </td>
+                    <td>
+                        <h5>
+                            Something completely different!
+                        </h5>
+			<p>
+                            Three of me playing a song! No audio tricks here, just camera tricks. Also, its the only video on my website to have audio! 
+                        </p>
+                    </td>
+                </tr>
             </table>
         </div>
 
