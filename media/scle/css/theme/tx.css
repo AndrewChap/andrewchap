@@ -1,0 +1,690 @@
+/**
+ * Tech-X theme for reveal.js, based on the white theme that
+ * comes with reveal.js
+ * By Andrew Chap, http://nucleus.txcorp.com/~chap/
+ */
+/* Todo: add plugins:
+ *   elapsed time
+ *   chalkboard
+ *   header/footer
+ */
+/* Import fonts from google */
+@import url(https://fonts.googleapis.com/css?family=News+Cycle:400,700);
+@import url(https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic);
+@import url(https://fonts.googleapis.com/css?family=Raleway:400,600,400italic,600italic);
+@import url(https://fonts.googleapis.com/css?family=Volkhov:400,400italic);
+@import url(https://fonts.googleapis.com/css?family=Stylish:400,400italic);
+@import url('https://fonts.googleapis.com/css?family=Righteous&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Roboto:100&display=swap');
+@import url(../../lib/font/source-sans-pro/source-sans-pro.css);
+section.has-dark-background, section.has-dark-background h1, section.has-dark-background h2, section.has-dark-background h3, section.has-dark-background h4, section.has-dark-background h5, section.has-dark-background h6 {
+color: #fff; }
+
+/*********************************************
+ * GLOBAL STYLES
+ *********************************************/
+body {
+  background: #fff;
+  background-color: #fff; 
+  background-image: url('../../images/dotsbackground.png');
+  background-repeat: no-repeat;
+  background-size: 100%;
+  background-padding: 150px;
+  height: 100%;
+  }
+
+.reveal {
+   font-family: "Source Sans Pro", Helvetica, sans-serif;
+   font-size: 24pt;
+   font-weight: normal;
+   color: #222; }
+
+::selection {
+   color: #fff;
+   background: #98bdef;
+text-shadow: none; }
+
+::-moz-selection {
+   color: #fff;
+   background: #98bdef;
+text-shadow: none; }
+
+  .reveal .slides {
+     /*height: 20%;
+     top: 0px; keeps slide from overlapping header  
+     margin-top: 0px;*/
+  }
+
+  .reveal .slides>section {
+     /*'border-box' includes padding in our height and width*/
+     box-sizing: border-box; 
+     height: 300px;
+     width: 100%;
+     min-height: 300px !important;
+     top: 0;
+     left: 0;
+     padding: 50px 0px 25px 0px; /*top, right, bottom, left*/
+  }
+  .reveal .slides>section.firstSlide {
+     /*'border-box' includes padding in our height and width*/
+     padding: 0;
+  }
+  .reveal .slides>section.title {
+     width: 70%;
+     left: 15%;
+     top: 500;
+     height: 90%;
+     vertical-align:middle;
+     text-align: center;
+     /*margin-top: 10%;*/
+  }
+  .reveal .slides>section>section.chapter {
+     min-height: 100%;
+     top: 25%;
+     width: 100%;
+     vertical-align:middle;
+     text-align: center;
+  }
+  .reveal .slides>section.plotly {
+     min-height: auto;
+     top: 0px;
+     margin-top: 2%;
+     left: 0%;
+     width: 100%;
+     max-width: 100%;
+     max-height: 100%;
+     vertical-align:bottom;
+     text-align: center;
+     padding: 30px 0px 15px 0px;
+  }
+  /* hack to make video not have margins */
+  .reveal img, .reveal video, .reveal iframe {
+     max-width: 100% !important;
+     max-height: 100% !important;
+
+  }
+
+  .reveal .slides>section>section {
+     box-sizing: border-box; 
+     height: 300px;
+     width: 100%;
+     top: 0;
+     min-height: 100%;
+     left: 0;
+     padding: 40px 20px 25px 20px; /*top, right, bottom, left*/
+  }
+
+/*********************************************
+ * HEADERS
+ *********************************************/
+.reveal h1,
+.reveal h2,
+.reveal h3,
+.reveal h4,
+.reveal h5,
+.reveal h6 {
+   margin: 0 0 20px 0;
+   color: #000;
+   /*font-family: "News Cycle", Impact, sans-serif;*/
+   font-weight: normal;
+   line-height: 1.0;
+   letter-spacing: normal;
+   text-transform: none;
+   text-shadow: none;
+   word-wrap: break-word; }
+
+ 
+
+  /* title slide title and chapter titles*/
+.reveal h1 {
+  font-size: 50pt;
+  font-family: "Raleway", sans-serif;
+  font-weight: 600;
+  color: #2c3374;
+}
+
+  /* title slide subtitle */
+.reveal h2 {
+  font-size: 20pt;
+  font-family: "Raleway", sans-serif;
+  font-weight: 600;
+  font-style: italic;
+  color: #888;
+  }
+
+  /* author list */
+.reveal h3 {
+  font-family:"Raleway", sans-serif;
+  font-size:32pt;
+  }
+
+  /* Slide titles*/
+.reveal h4 {
+  font-size: 44pt;
+  margin-bottom: 0;
+  font-family: "Raleway", sans-serif;
+  font-weight: 600;
+  color: #2c3374;
+  line-height: 2.0;
+}
+.reveal h5 {
+  font-size: 24pt;
+  margin-bottom: 0;
+  /*font-family: "News Cycle", sans-serif;*/
+  /*font-weight: 600;*/
+  color: #555;
+}
+.reveal h6 {
+  font-size: 20pt;
+}
+
+/*.reveal hr{
+  height: 0.1px;
+}*/
+hr.style17 {
+   width: 85%;
+   border-top: 1px solid #CCC;
+   border-bottom: 0px solid #CCC;
+   text-align: center;
+   height: 0px;
+}
+
+.eqn {
+   color:#33A;
+}
+/*
+hr.style17:after {
+   content: '§';
+   display: inline-block;
+   position: relative;
+   top: -31px;
+   padding: 0 0px;
+   background: #fff;
+   color: #AAA;
+   font-size: 10px;
+   -webkit-transform: rotate(60deg);
+   -moz-transform: rotate(60deg);
+   transform: rotate(60deg);
+}
+*/
+
+/*********************************************
+ * div columns
+ * *******************************************/
+.reveal div.column{
+   float: left;
+   width: 50%;
+}
+.reveal div.right{
+   width: auto;
+   float: right;
+}
+
+/*********************************************
+ * Title slide
+ *********************************************/
+/*65146E
+ * b63456
+ * f8870d
+ * ee6f20*/
+.reveal .SCL{
+  font-size: 14px;
+  letter-spacing: 40px;
+  text-transform:lowercase;
+  text-transform:uppercase;
+  line-height: 40px;
+  color: #944;
+  font-family: "Righteous", cursive;
+}
+.reveal .SCL3{
+  font-size: 24px;
+  letter-spacing: 10px;
+  line-height: 25px;
+  color: #944;
+  font-weight: 400;
+  font-family: "Righteous", cursive;
+}
+.reveal .SCL2{
+  font-size: 14px;
+  letter-spacing: 10px;
+  line-height: 10px;
+  color: #944;
+  font-weight: 400;
+  font-family: "Righteous", cursive;
+}
+.reveal .FPS{
+  font-size: 18px;
+  letter-spacing: 20px;
+  text-indent: 20px;
+  /*text-transform:lowercase;
+  text-transform:uppercase;*/
+  line-height: 50px;
+  color: #CCC;
+  font-family: "Roboto", cursive;
+}
+.reveal .PRESENTER{
+  font-size: 18px;
+  letter-spacing: 10px;
+  /*text-transform:lowercase;
+  text-transform:uppercase;*/
+  line-height: 20px;
+  color: #AAA;
+  font-family: "Roboto", cursive;
+}
+.reveal .NAME{
+  font-size: 28px;
+  letter-spacing: 10px;
+  /*text-transform:lowercase;
+  text-transform:uppercase;*/
+  font-variant: small-caps;
+  line-height: 20px;
+  color: #AAD;
+  font-family: "Roboto", cursive;
+}
+.reveal .VP{
+  font-size: 20px;
+  letter-spacing: 40px;
+  text-transform:uppercase;
+  color: black;
+  font-family: "Stylish";
+}
+.reveal .ROMAN{
+  font-size: 220px;
+  color: #333;
+  font-family: serif;
+}
+.reveal .PL{
+  font-size: 16px;
+  /*letter-spacing: 40px;*/
+  color: #CCC;
+  font-family: "Roboto", cursive;
+}
+/*********************************************
+ * Tech-X Header/footer
+ *********************************************/
+
+#hidden{
+   display:none;
+}
+div.subheader {
+   position: absolute;
+   top: 0;
+   padding: 0.5%;
+   margin: 0.5%;
+   max-width: 48%;
+   text-align: center;
+   background-color: rgba(255, 255, 255, 0.5)
+}
+div.header-left{
+   left: 0;
+}
+div.header-right{
+   right: 0;
+}
+#footer-left {
+   position: absolute;
+   bottom: 0%;
+   left: 0%;
+}
+.logo{
+   padding-bottom: 0.10em !important;
+}
+.txLogo{
+   display: block;
+   position: relative;
+   /*width: 200px*/
+   width: 225px;
+   top: 0;
+}
+.conference{
+   
+}
+.slogan{
+   text-align: center;
+   /*font-size: 11.0pt !important;*/
+   font-size: 13.5pt !important;
+   color: #35469D;
+}
+#static-background{
+   position: absolute;
+   top: 0%;
+   left: 0%;
+   width: 100%;
+   height: 100%;
+   text-align: center;
+   background-image: url('../../images/swooshbackground.png');
+   background-repeat: no-repeat;
+   background-size: 100%;
+   opacity: 1.0;
+   top: 2%;
+}
+.rightTitle{
+   font-size: 18pt !important;
+   color: #35469D;
+}
+.rightSubtitle{
+   font-size: 10.5pt !important;
+   color: #777;
+   letter-spacing: 1.8pt;
+}
+.rightAuthor{
+   font-variant: small-caps;
+   font-size: 13.5pt !important;
+   color: #999;
+}
+.rightHr{
+   margin-top:0.34%;
+   margin-bottom:0.23%;
+   border-color:#BBB;
+   color: #BBB;
+   background-color: #BBB;
+   border-top: 1px solid #BBB;
+}
+#footer-bottom {
+   position: absolute;
+   bottom: 0%;
+   left: 0;
+   width: 100%;
+   padding: 0 1.0vmax 1.0vmax 1.0vmax;
+   color: #666;
+   font-size: 18pt ;
+   text-align: center !important;
+   font-family: monospace;
+}
+/* cut sizes in half if mobile */
+/*@media screen and (max-width: 1000px) {
+   .slogan {
+       font-size: 0.4em !important;
+   }
+   .txLogo {
+       width: 200px !important;
+   }
+   .rightTitle{
+      font-size: 9pt !important;
+   }
+   .rightSubtitle{
+      font-size: 5pt !important;
+   }
+   .rightAuthor{
+      font-size: 6pt !important;
+   }
+  #footer-bottom {
+     font-size: 10pt;
+  }
+}
+*/
+
+/*********************************************
+ * IFrame zoom, from https://stackoverflow.com/a/3131624/1949542
+ *********************************************/
+/*.wrap { 
+   width: 200px;
+   height: 120px;
+   padding: 0;
+   overflow: hidden;
+}
+.frame {
+   width: 400px; 
+   height: 240px;
+   border: 1px solid black;
+   max-width: 200%;
+   max-height: 200%;
+}
+.frame {
+   overflow: hidden;
+   -ms-zoom: 0.5;
+   -moz-transform: scale(0.5);
+   -moz-transform-origin: 0 0;
+   -o-transform: scale(0.5);
+   -o-transform-origin: 0 0;
+   -webkit-transform: scale(0.5);
+   -webkit-transform-origin: 0 0;
+}*/
+
+/*********************************************
+ * OTHER
+ *********************************************/
+/* for placing an image anywhere on the screen */
+.imgplace{
+   display: block;
+   position: absolute;
+}
+.reveal p {
+   font-size: 24pt;
+   line-height: 1.3;
+   margin-bottom: 10pt;
+   text-align: left;
+}
+
+.reveal p.text{
+   text-align: left;
+   font-size: 8.5pt;
+   margin: 5pt;
+}
+/* Ensure certain elements are never larger than the slide itself */
+.reveal img,
+.reveal video,
+.reveal iframe {
+   max-width: 95%;
+max-height: 95%; }
+
+.reveal strong,
+.reveal b {
+font-weight: bold; }
+
+.reveal em {
+font-style: italic; }
+
+.reveal ol,
+.reveal dl,
+.reveal ul {
+   display: inline-block;
+   text-align: left;
+margin: 0 0 0 40px;
+   }
+
+.reveal ul li{
+  margin-bottom: 5pt;
+}
+.reveal ul.test li{
+  font-size:12pt;
+  margin-bottom: 0;
+}
+
+.reveal ol {
+list-style-type: decimal; }
+
+.reveal ul {
+list-style-type: disc; }
+
+.reveal ul ul {
+list-style-type: square; }
+
+.reveal ul ul ul {
+list-style-type: circle; }
+
+.reveal ul ul,
+.reveal ul ol,
+.reveal ol ol,
+.reveal ol ul {
+   display: block;
+margin-left: 20px; }
+
+.reveal ol.outline{
+   font-size: 22pt;
+}
+
+#jupyter-slide li{
+  font-size: 12pt;
+  margin: 6pt 0;
+}
+#intro-slide li code{
+  font-size: 10pt;
+  color: #B62;
+}
+#website-slide li{
+  font-size: 12pt;
+  margin: 6pt 0;
+}
+.plotly-slide li{
+   width:90%;
+   list-style: none;
+}
+.reveal dt {
+font-weight: bold; }
+
+.reveal dd {
+margin-left: 40px; }
+
+.reveal blockquote {
+   display: block;
+   position: relative;
+   width: 70%;
+   margin: 20px auto;
+   padding: 5px;
+   font-style: italic;
+   background: rgba(255, 255, 255, 0.05);
+box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.2); }
+
+.reveal blockquote p:first-child,
+.reveal blockquote p:last-child {
+display: inline-block; }
+
+.reveal q {
+font-style: italic; }
+
+.reveal pre {
+   display: block;
+   position: relative;
+   width: 90%;
+   margin: 10px auto;
+   text-align: left;
+   font-size: 0.55em;
+   font-family: monospace;
+   line-height: 1.2em;
+   word-wrap: break-word;
+box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.3); }
+
+.reveal code {
+   font-family: monospace;
+text-transform: none; }
+
+.reveal pre code {
+   display: block;
+   padding: 5px;
+   overflow: auto;
+   max-height: 400px;
+word-wrap: normal; }
+
+.reveal table {
+   margin: auto;
+   border-collapse: collapse;
+border-spacing: 0; }
+
+.reveal table th {
+font-weight: bold; }
+
+.reveal table th,
+.reveal table td {
+   text-align: left;
+   padding: 0.2em 0.5em 0.2em 0.5em;
+border-bottom: 1px solid; }
+
+.reveal table th[align="center"],
+.reveal table td[align="center"] {
+text-align: center; }
+
+.reveal table th[align="right"],
+.reveal table td[align="right"] {
+text-align: right; }
+
+.reveal table tbody tr:last-child th,
+.reveal table tbody tr:last-child td {
+border-bottom: none; }
+
+.reveal sup {
+   vertical-align: super;
+font-size: smaller; }
+
+.reveal sub {
+   vertical-align: sub;
+font-size: smaller; }
+
+.reveal small {
+   display: inline-block;
+   font-size: 0.6em;
+   line-height: 1.2em;
+vertical-align: top; }
+
+.reveal small * {
+vertical-align: top; }
+
+/*********************************************
+ * LINKS
+ *********************************************/
+.reveal a {
+   color: #2a76dd;
+   text-decoration: none;
+   -webkit-transition: color .15s ease;
+   -moz-transition: color .15s ease;
+transition: color .15s ease; }
+
+.reveal a:hover {
+   color: #6ca0e8;
+   text-shadow: none;
+border: none; }
+
+.reveal .roll span:after {
+   color: #fff;
+background: #1a53a1; }
+
+/*********************************************
+ * IMAGES
+ *********************************************/
+.reveal section img {
+   border: 0;
+   box-shadow: none; 
+}
+
+.reveal section img.border {
+   margin: 15px 0px;
+   background: rgba(255, 255, 255, 0.12);
+   border: 4px solid #222;
+   box-shadow: 0 0 10px rgba(0, 0, 0, 0.15); 
+}
+
+.reveal a img {
+   -webkit-transition: all .15s linear;
+   -moz-transition: all .15s linear;
+transition: all .15s linear; }
+
+.reveal a:hover img {
+   background: rgba(255, 255, 255, 0.2);
+   border-color: #2a76dd;
+box-shadow: 0 0 20px rgba(0, 0, 0, 0.55); }
+
+/*********************************************
+ * NAVIGATION CONTROLS
+ *********************************************/
+.reveal .controls {
+color: #2a76dd; }
+
+/*********************************************
+ * PROGRESS BAR
+ *********************************************/
+.reveal .progress {
+   background: rgba(0, 0, 0, 0.2);
+   color: #2a76dd;
+}
+
+.reveal .progress span {
+   -webkit-transition: width 800ms cubic-bezier(0.26, 0.86, 0.44, 0.985);
+   -moz-transition: width 800ms cubic-bezier(0.26, 0.86, 0.44, 0.985);
+transition: width 800ms cubic-bezier(0.26, 0.86, 0.44, 0.985); }
+
+/*********************************************
+ * PRINT BACKGROUND
+ *********************************************/
+@media print {
+   .backgrounds {
+background-color: #fff; } }

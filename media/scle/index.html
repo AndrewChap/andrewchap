@@ -1,0 +1,733 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=0.5, maximum-scale=0.5, user-scalable=no">
+
+      <title>Space Charge Limited emission in VSim</title>
+               
+		<meta name="description" content="Tech-X Presentation">
+		<meta name="author" content="Andrew Chap">
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/tx.css">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+      <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+	</head>
+	<body>
+		<div class="reveal">
+         <!-- In between the <div="reveal"> and the <div class="slides">-->
+         <header style="position: absolute;top: 50px; left: 100px; z-index:500; font-size:100px;background-color: rgba(0,0,0,0.5)"></header>
+			<div class="slides">
+            <!--
+               <section class="titles" data-background="images/mag.png">
+               <h1 width=90%>Space-charge-limited Emission in Vorpal</h1>
+               <hr class="style17" style="width:25%">
+               <h2>
+                  Tech-X Friday Presentation Series
+               </h2>
+					<h3>
+                  Andrew Chap 
+					</h3>
+               <h2>
+                  May 24<sup>th</sup> 2019
+               </h2>
+               <hr class="style17" style="width:25%">
+               <div style="width:50%; margin-left:25%">
+               <p style="font-size:12pt; text-align:center; text-width=50%">
+               <i>Auto-zoom is disabled because it doesn't work well with Plotly.  
+               <br>Please set your browser to full-screen and zoom in or out until the slides take up the entire page.</i>
+               </p>
+               </div>
+
+				</section>
+            -->
+            <!--<section class="titles" data-background="images/mag.png" style="height:100%">-->
+            <section class="firstSlide" data-background="#000004" style="height:100%">
+               <div style="position:absolute; height:100%; width:100%; z-index: 1; background-color: #000004">
+                  <!--<img src="images/mag.png" width=100%;>-->
+                  <video muted autoplay loop src="videos/mag_212_background.mp4" width=100%>
+               </div>
+               <div class="fragment fade-out" data-fragment-index="1" style="position:absolute; height:100%; width:100%; z-index: 2;">
+                  <h3 class="FPS" style="margin-top:27px">
+                     Tech-X FPS
+                     <br>
+                     5&bull;24&bull;2019</span>
+                  </h3>
+
+                  <h1 class="SCL" style="color: #65146E; text-indent: 60px; letter-spacing: 25px; margin-top:120px">space</h1>
+                  <h1 class="SCL" style="color: #B63456; text-indent: -70px; letter-spacing: 20px">charge</h1>
+                  <h1 class="SCL" style="color: #F8870D; text-indent: 40px; letter-spacing: 20px">limited</h1>
+                  <h1 class="SCL" style="color: #EE6f20; text-indent: 20px; letter-spacing: 20px">emission</h1>
+                  <h1 class="VP"  style="color: #888; text-indent: 1px; letter-spacing: 1px; margin-top:80px">in</h1>
+                  <h1>
+                     <img src="images/vsim.png" width=130px style="opacity: 0.8; margin-top:-120px"> 
+                  </h1>
+                  <div style="position:absolute; bottom:5vmax; left:5vmax;">
+                     <h3 class="PRESENTER">
+                        <i>Presented by</i>
+                     </h3>
+                     <hr size="1" style="border-color: #446">
+                     <h3 class="NAME">
+                        Andrew Chap 
+                     </h3>
+                  </div>
+               </div>
+               <div style="position:absolute; bottom:4vmax; right:5vmax; width:30vmax; z-index:3">
+                  <p class="PL" style="text-align:center; text-width=50%">
+                  *Auto-zoom is disabled because it doesn't work well with Plotly.  
+                  Please set your browser to full-screen and zoom in or out until the slides take up the entire page.
+
+                  </p>
+               </div>
+               <div class="fragment fade-in" data-fragment-index="2" style="z-index: 2;">
+                  <div class="fragment fade-out" data-fragment-index="8">
+
+                     <h1 class="SCL2" style="color: #9E2936; text-indent:  0px;">I. introduction</h1>
+
+                     <div style="position:absolute; height:100%; width:100%; z-index: 2;">
+                        <div > 
+                           <h1 class="SCL2" style="color: #65146E; text-indent: 15px; margin-top:230px">OUTLINE</h1>
+                           <hr size="1" width="15%" style="border-color: #668">
+                        </div>
+                        <h1 class="SCL2 fragment" data-fragment-index="3" style="color: #9E2936; text-indent:  0px;">I. introduction</h1>
+                        <h1 class="SCL2 fragment" data-fragment-index="4" style="color: #DA4E3A; text-indent: 20px;">II. electrostatics</h1>
+                        <h1 class="SCL2 fragment" data-fragment-index="5" style="color: #FA9506; text-indent: 15px; letter-spacing: 8px;">III. electromagnetics</h1>
+                        <h1 class="SCL2 fragment" data-fragment-index="6" style="color: #C23B4E; text-indent: 5px;  letter-spacing: 7px;">IV. temporal response</h1>
+                        <h1 class="SCL2 fragment" data-fragment-index="7" style="color: #83206B; text-indent: -10px;">V. applications</h1>
+                     </div>
+                  </div>
+               </div>
+               <div class="fragment" data-fragment-index="9" style="position:absolute; height:100%; width:100%; z-index: 2;">
+                  <h1 class="ROMAN" style="margin-top: 240px;">I</h1>
+                  <h1 class="SCL3 fragment" style="margin-top: -160px; color: #9E2936; text-indent:  10px; letter-spacing: 10px;">INTRODUCTION</h1>
+                  <!--<h1 class="SCL2 fragment" style="z-index:8; color: #9E2936; text-indent:  0px; font-size:20px; margin-top: 100px">I. HELLO</h1>-->
+               </div>
+            </section>
+            <section style="left: 5%; width: 90%">
+               <h3>The 1-D Child-Langmuir Law</h3>
+               <div class="column" style="width:55%">
+                  <p>Two boundaries:<p>
+                  <ul>
+                     <li>
+                        Separated by distance <span class="eqn">$d$</span> (domain length)
+                     </li>
+                     <li>
+                        Voltage bias <span class="eqn">$V$</span>
+                     </li>
+                     <li>
+                        Particles injected at left boundary with <span class="eqn">$v_0 = 0$</span>
+                     </li>
+                  </ul>
+                  <p>$J_\mathrm{SCL}$ is the maximum current that can cross the domain due to <b>Space-Charge-Limiting</b>:</p>
+
+
+                        
+                  <p class="eqn">$$J_\mathrm{SCL} = \frac{4}{9}\epsilon_0\sqrt{\frac{2 e}{m}}\frac{V^\frac{3}{2}}{d^2}$$</p>
+                  <!--<p>The potential field in the $v_0=0$ Child-Langmuir problem is:</p>
+                     <p>$$ \Phi(x) = \left(\frac{9}{4} \frac{J_\text\mathrm{SCL}}{\epsilon_0}\right)^{\frac{2}{3}} \left(\frac{m}{2q}   \right)^{\frac{1}{3}} x^\frac{4}{3}$$</p>-->
+               </div>
+               <div class="column" style="width:45%">
+                  <img src="images/phiOfJ.png">
+               </div>
+            </section>
+            <section style="left: 5%; width: 90%">
+               <h3>$\Phi$, $E$, $v$, and $\rho$</h3>
+               <div class="column">
+                  <p>
+                     Generalize: $d\rightarrow x$, $V \rightarrow \Phi(x)$
+                  </p>
+                  <hr>
+                  <p>
+                     $ \color{blue}{\Phi(x)} = \left(\frac{9}{4} \frac{J_\mathrm{SCL}}{\epsilon_0}\right)^{\frac{2}{3}} \left(\frac{m}{2e}   \right)^{\frac{1}{3}} \color{blue}{x^\frac{4}{3}}$
+                  </p>
+                  <p>
+                     $ \color{green}{E(x)} = \frac{d\color{blue}{\Phi(x)}}{dx} = \frac{4}{3}\left(\frac{9}{4} \frac{J_\mathrm{SCL}}{\epsilon_0}\right)^{\frac{2}{3}} \left(\frac{m}{2e}   \right)^{\frac{1}{3}} \color{green}{x^\frac{1}{3}}$
+                  </p>
+                  <p>
+                     $ \color{purple}{v(x)} = \sqrt{\frac{2 e\color{blue}{\Phi(x)}}{m}} =  \left(\frac{9}{2} \frac{e J_\mathrm{SCL}}{m\epsilon_0}\right)^{\frac{1}{3}}\color{purple}{x^\frac{2}{3}}$
+                  </p>
+                  <p>
+                  $ \color{red}{\rho(x)} = \frac{J_\mathrm{SCL}}{\color{purple}{v(x)}} = \left(\frac{2}{9} \frac{m \epsilon_0  J^2_\mathrm{SCL}}{e}\right)^{\frac{1}{3}}\color{red}{x^{-\frac{2}{3}}}$
+                  </p>
+
+
+               </div>
+               <div class="column">
+                  <img src="images/phiErho.png">
+               </div>
+            </section>
+            <section style="left: 5%; width: 90%">
+               <h3>Simulating Space-Charge-Limited (SCL) Emission in 1D</h3>
+               <div class="column" style="margin-right:1%; width:49%">
+                  <p>Because the equations for SCL flow are <b>self-similar</b>, we can simulate SCL emission on the left boundary without any information from the right boundary
+                  <img src="images/selfSimilar.png">
+                  $$ \color{red}{J_\mathrm{SCL}\left(x_a,\Phi_a\right)} = \color{purple}{J_\mathrm{SCL}\left(x_b,\Phi_b\right)}$$
+                  </p>
+               </div>
+               <div class="fragment" style="position:absolute; top:290px; left:220px; z-index:2">
+                  <img src="images/cloud.png" width="270px">
+               </div>
+               <div class="fragment" style="position:absolute; top:330px; left:270px; z-index:2">
+                  <p style="font-family: 'Righteous'; font-size:20px; color:#6ABBE9">
+                     Plasma,</p>
+               </div>
+               <div class="fragment" style="position:absolute; top:355px; left:290px; z-index:2">
+                  <p style="font-family: 'Righteous'; font-size:18px; color:#6ABBE9">
+                  Complex Geometry</p>
+               </div>
+               <div class="fragment" style="position:absolute; top:377px; left:380px; z-index:2">
+                  <p style="font-family: 'Righteous'; font-size:17px; color:#6ABBE9;">
+                  etc...</p>
+               </div>
+               <div class="fragment" style="position:absolute; top:376px; left:90px; z-index:2; background-color:white">
+                  <p style="font-size:24px;">
+                  $$\color{purple}{\left(\Delta x,\Phi(\Delta x)\right)}$$
+                  </p>
+               </div>
+               <div class="column" style="margin-left:1%; width:49%">
+                  <p>
+                     To simulate the local emission at the left boundary, we can calculate
+                  </p>
+                  <p class="eqn">
+                     $$J_\mathrm{emit} = J_\mathrm{SCL}(\Delta x, \Phi(\Delta x))$$
+                  </p>
+                  <p>
+                  We can use <span class="eqn">$\Phi(\Delta x) = E_0\Delta x$</span> so that our emitted current is:
+                  </p>
+                  <p class="eqn">
+                     $$J_\mathrm{emit} = \frac{4}{9}\epsilon_0\sqrt{\frac{2 e}{m}}\frac{E_0^\frac{3}{2}}{\sqrt{\Delta x}}$$</p>
+                  </p>
+                  <p style="font-size:18pt">
+                  where $E_0 = E(x=0)$ is the surface electric field and we take $\Phi(x=0)=0$.
+                  </p>
+                  <!--At an emitting cell face centered at $\mathbf{r}$ with normal $\hat{\mathbf{n}}$, we calculate the emission current as $$J_\mathrm{emit}(\mathbf{r}) = J_\mathrm{SCL}\left(\Delta L, \Phi(\mathbf{r} + \hat{\mathbf{n}}\Delta L)-\Phi(\mathbf{r})\right)$$
+                  
+                   Where we calculate the potential difference as 
+                   $$ \Phi(\mathbf{r} + \hat{\mathbf{n}}\Delta L)-\Phi(\mathbf{r}) = \mathbf{E}(\mathbf{r})\cdot\hat{\mathbf{n}}\Delta L $$
+                   with
+                   $$ \Delta L = \sqrt{(\Delta x^2 + \Delta y^2 + \Delta z^2) }$$-->
+                  </p>
+               </div>
+            </section>
+            <section style="left: 5%; width: 90%">
+               <h3>Simulating Space-Charge-Limited (SCL) Emission in 1D</h3>
+                  <p style="text-align:center">So we have:
+                  <span class="eqn">
+                  $J_\mathrm{emit} \sim \dfrac{E_0^\frac{3}{2}}{\sqrt{\Delta x}}$
+                  </span>
+                  </p>
+               <div class="column">
+                  <p><span style="color:gray"><b>Looks strange... because</b></span>
+                  <ul>
+                     <li>In space-charge-limited emission, <span class="eqn">$E_0$</span> should be zero</li>
+                     <br>
+                     <li>Our emitted current goes as <span class="eqn">$\Delta x^{-\frac{1}{2}}$</span></li>
+                  </ul>
+                  </p>
+               </div>
+               <div class="column">
+                  <p><span style="color:gray"><b>But...</b></span>
+                  <ul>
+                     <li>
+                        Because of finite differencing, we will never get <span class="eqn">$E_0 = 0$</span>, because <span class="eqn">$E_0 = \frac{\Phi(\Delta x) - \Phi(0)}{\Delta x}$</span> with  <span class="eqn">$\Phi \sim x^\frac{4}{3}$</span>
+                     </li>
+                     <li>
+                        Since <span class="eqn">$E \sim x^\frac{1}{3}$</span>, we have <span class="eqn">$E^\frac{3}{2} x^{-\frac{1}{2}} \sim 1$</span>
+                     </li>
+                  </ul>
+                  </p>
+                  <!--At an emitting cell face centered at $\mathbf{r}$ with normal $\hat{\mathbf{n}}$, we calculate the emission current as $$J_\mathrm{emit}(\mathbf{r}) = J_\mathrm{SCL}\left(\Delta L, \Phi(\mathbf{r} + \hat{\mathbf{n}}\Delta L)-\Phi(\mathbf{r})\right)$$
+                  
+                   Where we calculate the potential difference as 
+                   $$ \Phi(\mathbf{r} + \hat{\mathbf{n}}\Delta L)-\Phi(\mathbf{r}) = \mathbf{E}(\mathbf{r})\cdot\hat{\mathbf{n}}\Delta L $$
+                   with
+                   $$ \Delta L = \sqrt{(\Delta x^2 + \Delta y^2 + \Delta z^2) }$$-->
+               </div>
+            </section>
+            <section class="firstSlide" data-background="#000004" style="height:100%">
+               <div style="position:absolute; height:100%; width:100%; z-index: 1; background-color: #000004">
+                  <!--<img src="images/mag.png" width=100%;>-->
+                  <video muted autoplay src="videos/mag_212_background.mp4" width=100%>
+               </div>
+               <div style="position:absolute; height:100%; width:100%; z-index: 2;">
+                  <h1 class="ROMAN" style="margin-top: 250px;">II</h1>
+                  <h1 class="SCL3 fragment" style="margin-top: -160px; color: #DA4E3A; text-indent:  2px; letter-spacing: 6px;">ELECTROSTATICS</h1>
+                  <!--<h1 class="SCL2 fragment" style="z-index:8; color: #9E2936; text-indent:  0px; font-size:20px; margin-top: 100px">I. HELLO</h1>-->
+               </div>
+            </section>
+            <!--
+            <section style="left: 5%; width: 90%">
+               <h3>Results: $J_\mathrm{SCL}$ vs spatial resolution</h3>
+               
+
+               <div class="column" style="width:35%"> 
+                  <p><i>Test Problem:</i></p>
+                  <p style="font-size:20pt"><span class="eqn">$V = 1\,\mathrm{Volt}$</span>, <span class="eqn">$L = 1\,\mathrm{meter}$</span></p>
+                  <p><span style="font-size:20pt">Electrons emitted from left boundary</span></p>
+                  <hr>
+                  <p>Steady-state results from calculating <span class="eqn">$J_\mathrm{SCL}$</span> from the self-consistent electric field at the left surface</p>
+                  <p><span class="eqn">$$\mathrm{Error}\left[J_\mathrm{SCL}\right]\sim \Delta x^\frac{2}{3}$$</span></p>
+               </div>
+               <div style="position:absolute; right: 0; top:27%; width:65%; z-index:-2">
+                  <div class="fragment fade-out" id="rho_vs_NX" style="height: 600px; width: 850px;" class="plotly-graph-div"></div><script type="text/javascript" src="plotly/rho_vs_NX.js"></script>
+               </div>
+               <div class="fragment fade-in" style="position:absolute; right: 0; top:27%; width:65%; z-index:-1">
+                  <div class="fragment fade-out" id="phi_vs_NX" style="height: 600px; width: 850px;" class="plotly-graph-div"></div><script type="text/javascript" src="plotly/phi_vs_NX.js"></script>
+               </div>
+               <div class="fragment fade-in" style="position:absolute; right: 0; top:27%; width:65%; z-index:-3">
+                  <div class="fragment fade-out" id="J_vs_NX" style="height: 600px; width: 850px;" class="plotly-graph-div"></div><script type="text/javascript" src="plotly/J_vs_NX.js"></script>
+               </div>
+            </section>
+            -->
+            <section data-transition="fade-out" style="left: 5%; width: 90%">
+               <h3>Results: $J_\mathrm{SCL}$ vs spatial resolution</h3>
+               <div class="column" style="width:35%"> 
+                  <p><i>Test Problem:</i></p>
+                  <p style="font-size:20pt"><span class="eqn">$V = 1\,\mathrm{Volt}$</span>, <span class="eqn">$L = 1\,\mathrm{meter}$</span></p>
+                  <p><span style="font-size:20pt">Electrons emitted from left boundary</span></p>
+                  <hr>
+                  <p>Steady-state results from calculating <span class="eqn">$J_\mathrm{SCL}$</span> from the self-consistent electric field at the left surface</p>
+                  <p><span class="eqn">$$\mathrm{Error}\left[J_\mathrm{SCL}\right]\sim \Delta x^\frac{2}{3}$$</span></p>
+               </div>
+               <div style="position:absolute; right: 0; top:27%; width:65%; z-index:-2">
+                  <div id="rho_vs_NX" style="height: 600px; width: 850px;" class="plotly-graph-div"></div><script type="text/javascript" src="plotly/rho_vs_NX.js"></script>
+               </div>
+            </section>
+            <section data-transition="fade" style="left: 5%; width: 90%">
+               <h3>Results: $J_\mathrm{SCL}$ vs spatial resolution</h3>
+               <div class="column" style="width:35%"> 
+                  <p><i>Test Problem:</i></p>
+                  <p style="font-size:20pt"><span class="eqn">$V = 1\,\mathrm{Volt}$</span>, <span class="eqn">$L = 1\,\mathrm{meter}$</span></p>
+                  <p><span style="font-size:20pt">Electrons emitted from left boundary</span></p>
+                  <hr>
+                  <p>Steady-state results from calculating <span class="eqn">$J_\mathrm{SCL}$</span> from the self-consistent electric field at the left surface</p>
+                  <p><span class="eqn">$$\mathrm{Error}\left[J_\mathrm{SCL}\right]\sim \Delta x^\frac{2}{3}$$</span></p>
+               </div>
+               <div style="position:absolute; right: 0; top:27%; width:65%; z-index:-2">
+                  <div id="phi_vs_NX" style="height: 600px; width: 850px;" class="plotly-graph-div"></div><script type="text/javascript" src="plotly/phi_vs_NX.js"></script>
+               </div>
+            </section>
+            <section data-transition="fade-in" style="left: 5%; width: 90%">
+               <h3>Results: $J_\mathrm{SCL}$ vs spatial resolution</h3>
+               <div class="column" style="width:35%"> 
+                  <p><i>Test Problem:</i></p>
+                  <p style="font-size:20pt"><span class="eqn">$V = 1\,\mathrm{Volt}$</span>, <span class="eqn">$L = 1\,\mathrm{meter}$</span></p>
+                  <p><span style="font-size:20pt">Electrons emitted from left boundary</span></p>
+                  <hr>
+                  <p>Steady-state results from calculating <span class="eqn">$J_\mathrm{SCL}$</span> from the self-consistent electric field at the left surface</p>
+                  <p><span class="eqn">$$\mathrm{Error}\left[J_\mathrm{SCL}\right]\sim \Delta x^\frac{2}{3}$$</span></p>
+               </div>
+               <div style="position:absolute; right: 0; top:27%; width:65%; z-index:-2">
+                  <div id="J_vs_NX" style="height: 600px; width: 850px;" class="plotly-graph-div"></div><script type="text/javascript" src="plotly/J_vs_NX.js"></script>
+               </div>
+            </section>
+            <section data-transition="fade-in" style="left: 5%; width: 90%">
+               <h3>What about returning current?</h3>
+               <div class="column" style="width: 65%"> 
+                  <p><span style="font-size:20pt">Same test as before except electrons reflected at right boundary</span></p>
+                  <p style="font-size:20pt">&bull; <b>Theoretical result:</b> <span class="eqn">$\left[J_\mathrm{SCL}\right]_\mathrm{two-way} = \frac{1}{2} \left[J_\mathrm{SCL}\right]_\mathrm{one-way}$</span> since reflected particles create twice the space charge</p>
+                  <p style="font-size:20pt">&bull; In <b>numerical experiments</b>, <span class="eqn">$\left[J_\mathrm{SCL}\right]_\mathrm{two-way} \lt \frac{1}{2} \left[J_\mathrm{SCL}\right]_\mathrm{one-way}$</span> because not all particles have <i>exactly</i> the energy needed to return to the cathode, some get trapped and create a virtual cathode that reduces <span class="eqn">$J_\mathrm{SCL}$</span></p>
+               </div>
+               <div class="column" style="width: 35%"> 
+                  <img src="images/return_phasespace.png">
+               </div>
+               <div style="position:absolute; display:block; left: 9%; top:500px; width:25%; z-index:3">
+                  <p style="color:green">$J_\mathrm{SCL}(t)$</p>
+               </div>
+               <div style="position:absolute; display:block; left: 29%; top:520px; width:25%; z-index:3">
+                  <p style="font-size:18pt">$N_\mathrm{electrons}(t)$</p>
+               </div>
+               <div style="position:absolute; display:block; left: 65%; top:500px; width:25%; z-index:2">
+                  <p style="color:red">$\Phi(x)$</p>
+               </div>
+               <div style="position:absolute; display:block; left: 18%; top:470px; width:31%; z-index:2">
+                  <img src="images/return_numelec.png">
+               </div>
+               <div class="column" style="width:50%"> 
+                  <img src="images/return_emitted_current.png">
+               </div>
+               <div class="column" style="width:50%"> 
+                  <img src="images/return_phi.png">
+               </div>
+            </section>
+            <section class="firstSlide" data-background="#000004" style="height:100%">
+               <div style="position:absolute; height:100%; width:100%; z-index: 1; background-color: #000004">
+                  <!--<img src="images/mag.png" width=100%;>-->
+                  <video muted autoplay src="videos/mag_212_background.mp4" width=100%>
+               </div>
+               <div style="position:absolute; height:100%; width:100%; z-index: 2;">
+                  <h1 class="ROMAN" style="margin-top: 270px;">III</h1>
+                  <h1 class="SCL3 fragment" style="margin-top: -160px; color: #FA9506; text-indent:  2px; letter-spacing: 4px;">ELECTROMAGNETICS</h1>
+                  <!--<h1 class="SCL2 fragment" style="z-index:8; color: #9E2936; text-indent:  0px; font-size:20px; margin-top: 100px">I. HELLO</h1>-->
+               </div>
+            </section>
+            <section style="left: 5%; width: 90%" data-transition="fade-out">
+               <h3>3D SCL EM parallel plates</h3>
+               <div class="column">
+                  <p><b>Issues</b> with electromagnetic SCL</p>
+                  <ul>
+                     <li>Can't specify voltage in EM!</li>
+                     <li><span class="eqn">$\frac{1}{c^2}\frac{d\mathbf{E}}{dt} = \mu_0\mathbf{J}$</span>: Constant <span class="eqn">$J_\mathrm{SCL}$</span> means <span class="eqn">$E$</span> keeps increasing! Results in oscillatory solution, "virtual cathode"</li>
+                  </ul>
+                  <p><b>Workaround:</b> impose displacement current density <span class="eqn">$J_\mathrm{D}$</span>, then in steady-state: <span class="eqn">$J_\mathrm{SCL} = J_\mathrm{D}$</span></p>
+                  <p>Integrate <span class="eqn">$E$</span> across the gap to find <span class="eqn">$V$</span> across the gap, compare to <span class="eqn">$V_\mathrm{SCL} = \left(\frac{9}{4} \frac{J_\mathrm{D}}{\epsilon_0}\right)^{\frac{2}{3}} \left(\frac{m}{2e}   \right)^{\frac{1}{3}} L^\frac{4}{3}$</span>
+
+               </div>
+               <div class="column" style="width: 45%; margin-left:5%">
+                  <p>David Smithe's 3D simulation of 1D SCL flow (<a href="downloads/sclEM.sdf" target="blank">download it!</a>)</p>
+                  <img src="images/sclParallel.png" width="300px" style="width=100px; left:5%; margin-top:0px;">
+                  <p>Impose <span class="eqn">$J_{\mathrm{D},x}$</span> periodic boundaries in <span class="eqn">$y$</span> and <span class="eqn">$z$</span></p>
+
+               </div>
+            </section>
+            <section style="left: 5%; width: 90%" data-transition="fade">
+               <h3>3D SCL EM parallel plates continued</h3>
+               <div class="column">
+                  <p><i>Test Problem:</i> <span style="font-size:20pt"><span class="eqn">$J_\mathrm{D} = 250\,\frac{\mathrm{A}}{\mathrm{m}^2}$</span>, <span class="eqn">$L = 10\,\mathrm{cm}$</span></span>
+                  <p> <span class="eqn">$V_\mathrm{SCL} = \left(\frac{9}{4} \frac{J_\mathrm{D}}{\epsilon_0}\right)^{\frac{2}{3}} \left(\frac{m}{2e}   \right)^{\frac{1}{3}} L^\frac{4}{3} = 10.5\,\mathrm{kV}$</span>
+                  <hr>
+                  <p> Baseline simulation: <span style="font-family:'Courier New', Courier, monospace">funcVelGen</span> with <span class="eqn">$J_\mathrm{emit} = 1.25J_\mathrm{D}$</span>
+                  <p> <span class="eqn">$\left[V_\mathrm{SCL}\right]_\mathrm{funcVelGen} = 11.3\,\mathrm{kV}$</span></p>
+                  <hr>
+                  <p> Test: <span style="font-family:'Courier New', Courier, monospace">childLangmuirVelGen</span> with no emit current specified</p>
+                  <p> <span class="eqn">$\left[V_\mathrm{SCL}\right]_\mathrm{childLangmuirVelGen} = 10.9\,\mathrm{kV}$</span></p>
+               </div>
+               <div class="column" style="width: 45%; margin-left:5%">
+                  <p> <span class="eqn">$\left[\color{black}{V_\mathrm{SCL}}\right]_\mathrm{funcVelGen}$</span></p>
+                  <img src="images/trunkVSCL.png" width="100%" style="">
+                  <p> <span class="eqn">$\left[\color{black}{V_\mathrm{SCL}}\right]_\mathrm{childLangmuirVelGen}$</span></p>
+                  <img src="images/branchVSCL.png" width="100%" style="">
+
+               </div>
+            </section>
+            <section style="left: 5%; width: 90%" data-transition="fade-in">
+               <h3>3D SCL EM parallel plates continued</h3>
+               <div class="column" style="width:25%">
+                  <p><i>Test Problem:</i> <span style="font-size:20pt"><span class="eqn">$J_\mathrm{D} = 250\,\frac{\mathrm{A}}{\mathrm{m}^2}$</span>, <span class="eqn">$L = 10\,\mathrm{cm}$</span>, <span class="eqn">$A = 0.04\,\mathrm{m}^2$</span>, <span class="eqn">$J_D = 10 \,\mathrm{A}$</span></span>
+               </div>
+               <div class="column" style="width: 70%; margin-left:5%">
+                  <p> <span class="eqn">$\left[\color{green}{J_\mathrm{cathode-emit}},\color{blue}{J_\mathrm{cathode-absorb}},\color{red}{J_\mathrm{anode-absorb}}\right]_\mathrm{funcVelGen}$</span></p>
+                  <img src="images/trunkJSCL.png" width="500px" style="">
+                  <p> <span class="eqn">$\left[\color{green}{J_\mathrm{cathode-emit}},\color{blue}{J_\mathrm{cathode-absorb}},\color{red}{J_\mathrm{anode-absorb}}\right]_\mathrm{childLangmuirVelGen}$</span></p>
+                  <img src="images/branchJSCL.png" width="500px" style="">
+
+               </div>
+            </section>
+            <section style="left: 5%; width: 90%">
+               <h3>Testing SCL cut-cell emission</h3>
+               <div class="column">
+                  <p>Take David Smithe's example, and rotate the plates so that they are not grid-aligned </p>
+                  <img src="images/slantedElectrodeSCL_diagram.jpg" style="width:400px;  display: block; margin-left: auto; margin-right: auto;">
+                  <p>Periodic boundaries in <span class="eqn">$x$</span>, <span class="eqn">$y$</span>, and <span class="eqn">$z$</span>
+
+               </div>
+               <div class="column" style="width: 45%; margin-left:5%">
+                  <p>(<a href="downloads/sclEMrotated.sdf" target="blank">Download it!</a>)</p>
+                  <img src="images/scl_slant_setup.png" style="width:400px;  display: block; margin-left: auto; margin-right: auto;">
+                  <p>Electrodes intersect boundaries such that they are periodic as well</p>
+               </div>
+            </section>
+            <section style="left: 5%; width: 90%">
+               <h3>Testing SCL cut-cell emission</h3>
+               <div class="column" style="width:25%; z-index:3">
+                  <br>
+                  <p>Found strange electron "banding" in both <span style="font-family:'Courier New', Courier, monospace; font-size: 20pt;">funcVelGen</span> &amp; <span style="font-family:'Courier New', Courier, monospace; font-size: 18pt;">childLangmuirVelGen</span> </p>
+                  <p>Since <span class="eqn">$E_\mathrm{normal} \rightarrow 0$</span>, even a small amount of <span class="eqn">$E_\parallel$</span> will cause electrons to move parallel to the emitting surface.</p>
+               </div>
+               <div class="column" style="width:25%">
+                  <br>
+                  <img src="images/slantedElectrodesElectrons.png" width="300px" style="">
+               </div>
+               <!--<div class="column" style="width: 45%; margin-left:5%">
+                  <video muted autoplay src="videos/highPPS.mp4" width=100%>
+               </div>-->
+               <div class="fragment" style="position:absolute; top:40px; right: -80px; width: 60%; z-index:-1">
+                  <video muted autoplay src="videos/highPPS.mp4" width=100%>
+               </div>
+            </section>
+            <section class="firstSlide" data-background="#000004" style="height:100%">
+               <div style="position:absolute; height:100%; width:100%; z-index: 1; background-color: #000004">
+                  <!--<img src="images/mag.png" width=100%;>-->
+                  <video muted autoplay src="videos/mag_212_background.mp4" width=100%>
+               </div>
+               <div style="position:absolute; height:100%; width:100%; z-index: 2;">
+                  <h1 class="ROMAN" style="margin-top: 270px;">IV</h1>
+                  <h1 class="SCL3 fragment" style="margin-top: -172px; color: #C23B4E; text-indent:  12px; letter-spacing: 12px;">TEMPORAL<br>RESPONSE</h1>
+                  <!--<h1 class="SCL2 fragment" style="z-index:8; color: #9E2936; text-indent:  0px; font-size:20px; margin-top: 100px">I. HELLO</h1>-->
+               </div>
+            </section>
+            <section style="left: 5%; width: 90%">
+               <h3>Slow Voltage Rise</h3>
+               <div class="column" style="width:25%">
+               <p>Voltage rises over a few crossing times</p>
+               <p>$$\downarrow$$</p>
+               <p>Similar results to steady-state problem</p>
+               </div>
+               <div class="column" style="width:70%">
+               <video muted autoplay src="videos/slowRise.mp4" style="width:800px">
+               </div>
+            </section>
+            <section style="left: 5%; width: 90%">
+               <h3><i>Fast</i> Voltage Rise</h3>
+               <div class="column" style="width:20%">
+               <p>Voltage rises over less than a crossing time</p>
+               <p>$$\downarrow$$</p>
+               <p><span class="eqn">$J_\mathrm{emit}$</span> oscillates</p>
+               </div>
+               <div class="column" style="width:70%">
+               <video muted autoplay src="videos/fastRise.mp4" style="width:800px">
+               </div>
+            </section>
+            <section style="left: 1%; width: 98%">
+               <div style="position:absolute; top:30%; left: 0%; width:100%; z-index: 2;">
+                  <h3>Slow Voltage Convergence</h3>
+               </div>
+               <div class="column" >
+                  <div id="slowRise_vs_nx" style="height: 600px; width: 650px;" class="plotly-graph-div"></div><script type="text/javascript" src="plotly/slowRise_vs_nx.js"></script>
+               </div>
+               <div class="column" >
+                  <div id="slowRise_vs_dt" style="height: 600px; width: 650px;" class="plotly-graph-div"></div><script type="text/javascript" src="plotly/slowRise_vs_dt.js"></script>
+               </div>
+            </section>
+            <section style="left: 1%; width: 98%">
+               <div style="position:absolute; top:30%; left: 0%; width:100%; z-index: 2;">
+                  <h3><i>Fast</i> Voltage Convergence</h3>
+               </div>
+               <div class="column" >
+                  <div id="fastRise_vs_nx" style="height: 600px; width: 650px;" class="plotly-graph-div"></div><script type="text/javascript" src="plotly/fastRise_vs_nx.js"></script>
+               </div>
+               <div class="column" >
+                  <div id="fastRise_vs_dt" style="height: 600px; width: 650px;" class="plotly-graph-div"></div><script type="text/javascript" src="plotly/fastRise_vs_dt.js"></script>
+               </div>
+            </section>
+            <!--<section style="left: 1%; width: 98%">
+               <h3>Electromagnetic test: oscillating displacement current</h3>
+               <div class="column" style="width:90%" >
+                  <div id="slant_osc" style="height: 500px; width: 1200px;" class="plotly-graph-div"></div><script type="text/javascript" src="plotly/slant_osc.js"></script>
+               </div>
+            </section>-->
+            <section class="firstSlide" data-background="#000004" style="height:100%">
+               <div style="position:absolute; height:100%; width:100%; z-index: 1; background-color: #000004">
+                  <!--<img src="images/mag.png" width=100%;>-->
+                  <video muted autoplay src="videos/mag_212_background.mp4" width=100%>
+               </div>
+               <div style="position:absolute; height:100%; width:100%; z-index: 2;">
+                  <h1 class="ROMAN" style="margin-top: 270px;">V</h1>
+                  <h1 class="SCL3 fragment" style="margin-top: -160px; color: #83206B; text-indent:  12px; letter-spacing: 12px;">APPLICATIONS</h1>
+                  <!--<h1 class="SCL2 fragment" style="z-index:8; color: #9E2936; text-indent:  0px; font-size:20px; margin-top: 100px">I. HELLO</h1>-->
+               </div>
+            </section>
+
+            <section style="left: 3%; width: 95%">
+               <h3>Magnetically Insulated Line Oscillator (MILO)</h3>
+               <div class="column" style="width:70%" >
+               <p>Pulsed power microwave device<br>
+               DC power &rarr; electron current &rarr; RF power</p> 
+                  <img src="images/miloElectrons.png" width="800px">
+               </div>
+               <div class="column" style="width:30%" >
+                  <h5><i>Grid Resolution Depencence:</i></h5>
+                  <p style="font-size:18pt;"> Slow wave structure at <b>twice</b> the resolution:<p>
+                  <img src="images/sws_highres.png" width="250px">
+                  <p style="font-size:18pt;"> Slow wave structure at <b>half</b> the resolution:<p>
+                  <img src="images/sws_lowres.png"  width="250px">
+               </div>
+            </section>
+            <section style="left: 1%; width: 98%">
+               <h3>Magnetically Insulated Line Oscillator (MILO)</h3>
+               <div class="column" style="width:90%" >
+                  <div id="milo_absorbed" style="height: 500px; width: 1200px;" class="plotly-graph-div"></div><script type="text/javascript" src="plotly/milo_absorbed.js"></script>
+               </div>
+            </section>
+            <section style="left: 1%; width: 98%">
+               <h3>Magnetically Insulated Line Oscillator (MILO)</h3>
+               <div class="column" style="width:90%" >
+                  <div id="milo_compare" style="height: 500px; width: 1200px;" class="plotly-graph-div"></div><script type="text/javascript" src="plotly/milo_compare.js"></script>
+               </div>
+            </section>
+            <section style="left: 1%; width: 98%">
+               <h3>Magnetically Insulated Line Oscillator (MILO)</h3>
+               <div class="column" style="width:90%" >
+                  <div id="milo_fft_abs" style="height: 500px; width: 1200px;" class="plotly-graph-div"></div><script type="text/javascript" src="plotly/milo_fft_abs.js"></script>
+               </div>
+            </section>
+            <section style="left: 1%; width: 98%">
+               <h3>Magnetically Insulated Line Oscillator (MILO)</h3>
+               <div class="column" style="width:90%" >
+                  <div id="milo_fft" style="height: 500px; width: 1200px;" class="plotly-graph-div"></div><script type="text/javascript" src="plotly/milo_fft.js"></script>
+               </div>
+            </section>
+            <section class="firstSlide" data-background="#000004" style="height:100%">
+               <div style="position:absolute; height:100%; left: 2%; width:28%; z-index: 3;">
+                  <h3 style="margin-top: 10%;">Magnetron<br>Cathode<br>Simulation<br><span style="font-size:14pt; margin-top:-150px">with the</span><br>SCL Emitter</h3>
+                  <img src="images/risingSun.png" style="margin-top:-20px">
+                  <h3 style="margin-top: 0%; font-size:14pt">Rising Sun configuration</h3>
+                  <h3 style="margin-top: 2%; font-size:14pt">Plots are zoomed in on the central cathode</h3>
+                  <h3 style="margin-top: 2%; font-size:14pt">Density is oversampled on a $300\times300$ grid and run with a high particle resolution $\sim5\times10^6$ particles.</h3>
+               </div>
+               <div style="position:absolute; height:100%; width:100%; z-index: 1; background-color: #000004">
+               </div>
+               <div style="position:absolute; height:100%; right:0; width:72%; z-index: 2; background-color: #000004">
+                  <!--<img src="images/mag.png" width=100%;>-->
+                  <video muted autoplay src="videos/magnetron_4compare.mp4" width=100%>
+               </div>
+            </section>
+            <section class="firstSlide" data-background="#000004" style="height:100%">
+               <div style="position:absolute; height:100%; left: 2%; width:28%; z-index: 3;">
+                  <h3 style="margin-top: 10%;">Magnetron<br>Cathode<br>Simulation<br><span style="font-size:14pt; margin-top:-150px">with the</span><br>Constant current source</h3>
+                  <img src="images/risingSun.png" style="margin-top:-20px">
+                  <h3 style="margin-top: 0%; font-size:14pt">Regular Magnetron2D example</h3>
+               </div>
+               <div style="position:absolute; height:100%; width:100%; z-index: 1; background-color: #000004">
+               </div>
+               <div style="position:absolute; height:100%; right:0; width:72%; z-index: 2; background-color: #000004">
+                  <!--<img src="images/mag.png" width=100%;>-->
+                  <video muted autoplay src="videos/magnetron_4compareTrunk.mp4" width=100%>
+               </div>
+            </section>
+            <section class="firstSlide" data-background="#000004" style="height:100%">
+               <div style="position:absolute; height:100%; width:100%; z-index: 1; background-color: #000004">
+                  <!--<img src="images/mag.png" width=100%;>-->
+                  <video muted autoplay src="videos/mag_212_background.mp4" width=100%>
+               </div>
+               <div style="position:absolute; height:100%; width:100%; z-index: 2;">
+                  <h1 class="ROMAN" style="margin-top: 270px;">VI</h1>
+                  <h1 class="SCL3 fragment" style="margin-top: -160px; color: #07B; text-indent:  12px; letter-spacing: 12px;">FUTURE WORK</h1>
+                  <!--<h1 class="SCL2 fragment" style="z-index:8; color: #9E2936; text-indent:  0px; font-size:20px; margin-top: 100px">I. HELLO</h1>-->
+               </div>
+            </section>
+            <section style="left: 5%; width: 90%">
+               <h3>Future work</h3>
+                  <p>&bull; Currently working on <span class="eqn">$v_0>0$</eqn> that follows
+                     <span class="eqn">$$J_\mathrm{SCL}(v \gt 0) = J_\mathrm{SCL}(v=0)\left[\left(1 + \frac{\frac{1}{2}mv^2}{eV}\right)^\frac{1}{2}\right]^3$$</span>
+                  </p>
+                  <p>&bull; <b>Thermal emitter?</b></p>
+                  <p>Requires numerical solution to find maximum <span class="eqn">$J_\mathrm{SCL}$</span> (excluding return current) for <span class="eqn">$J_\mathrm{SCL}\left(L\mathrm{gap},V_\mathrm{gap},T_\mathrm{surface}\right)$</span>
+                  </p>
+                  <br>
+                  <p>&bull; Option to make the particle weights more consistent, by specifying macroparticle weight and maximum particles emitted per cell in a step
+                  <!--$$ w = \mathrm{ceil}\left(\frac{J_\mathrm{SCL}*\Delta t}{\mathrm{macroparticle weight}\right)$$--></p>
+            </section>
+
+            <section class="firstSlide" data-background="#000004" style="height:100%">
+               <div style="position:absolute; height:100%; width:100%; z-index: 1; background-color: #000004">
+                  <!--<img src="images/mag.png" width=100%;>-->
+                  <video muted autoplay src="videos/mag_212_background.mp4" width=100%>
+               </div>
+               <div style="position:absolute; height:100%; width:100%; z-index: 2;">
+                  <!--<h1 class="ROMAN" style="margin-top: 270px;">Q</h1>
+                  <h1 class="SCL3 fragment" style="margin-top: -160px; color: #83206B; text-indent:  12px; letter-spacing: 12px;">Questions?</h1>-->
+                  <!--<h1 class="ROMAN" style="font-size:120pt; margin-top: 300px;">FIN</h1>
+                  <h1 class="SCL3 fragment" style="font-size:30pt; margin-top: -130px; color: #83206B; text-indent:  22px; letter-spacing: 22px;">THE END</h1>-->
+                  <h1 class="ROMAN" style="font-size:40pt; margin-top: 280px; font-variant: small-caps;">The</h1>
+                  <h1 class="ROMAN" style="font-size:90pt; margin-top: -40px;">END</h1>
+                  <h1 class="SCL3 fragment" style="margin-top: -100px; color: #A3207B; text-indent:  20px; letter-spacing: 20px;">Questions?</h1>
+                  <!--<h1 class="SCL2 fragment" style="z-index:8;9color: #9E2936; text-indent:  0px; font-size:20px; margin-top: 100px">I. HELLO</h1>-->
+               </div>
+            </section>
+			</div>
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+			// More info about config & dependencies:
+			// - https://github.com/hakimel/reveal.js#configuration
+			// - https://github.com/hakimel/reveal.js#dependencies
+			Reveal.initialize({
+               autoPlayMedia: true, 	
+               controls: true,
+               progress: true,
+               history: true,
+               center: true,
+               hideAddressBar: true,
+               width: 1280,
+               height: 720,
+               viewDistance: 2,
+               margin: 0.00,
+               minScale: 1.0,
+               maxScale: 1.0,
+               slideNumber: true,
+               transition: 'convex', // none/fade/slide/convex/concave/zoom
+				dependencies: [
+					{ src: 'plugin/markdown/marked.js' },
+					{ src: 'plugin/markdown/markdown.js' },
+					{ src: 'plugin/notes/notes.js', async: true },
+               { src: 'plugin/math/math.js', async: true},
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+				]
+         });
+         Reveal.configure({
+            keyboard: {
+               40: 'next', // go to the next slide when the down arrow is pressed
+               38: 'prev', // go to the previous slide when the up arrow is pressed
+            }
+         });
+
+		</script>
+      <!-- https://github.com/rodneyrehm/viewport-units-buggyfill -->
+      <!-- https://stackoverflow.com/questions/42218093/is-there-any-replacement-for-vmax-in-ie -->
+
+<!-- 2. Create hidden header/footer <div> -->
+<div id="hidden">
+   <div id="header">
+      <div id="static-background"></div>
+      <div class="subheader header-left">
+         <div class="logo">
+            <img src="images/tx.png" class="txLogo">
+         </div>
+         <div class="slogan">
+            SIMULATIONS EMPOWERING<br>YOUR INNOVATIONS
+         </div>
+      </div>
+         <div class="subheader header-right">
+            <div class="rightTitle">
+                Space-charge-limited Emission in VSim
+            </div>
+            <hr class="rightHr" style="width:90%">
+            <div class="rightAuthor">
+               <span style="font-weight: bold; color: #4657AE">
+                  Andrew Chap
+               </span>
+               &bull;
+               Tech-X Friday Presentation Series
+               &bull; May 24<sup>th</sup>, 2019
+            </div>
+         </div>
+
+         <div id="footer-bottom" style="z-index:10">
+            http://www.andrewchap.com/media/scle
+         </div>
+   </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+<script type="text/javascript">
+    // 3. On Reveal.js ready event, copy header/footer <div> into each `.slide-background` <div>
+    var header = $('#header').html();
+    if ( window.location.search.match( /print-pdf/gi ) ) {
+        Reveal.addEventListener( 'ready', function( event ) {
+            $('.slide-background').append(header);
+        });
+    }
+    else {
+        $('div.reveal').append(header);
+   }
+</script>
+
+	</body>
+
+</html>
