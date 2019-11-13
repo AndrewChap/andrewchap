@@ -44,6 +44,10 @@ ul.topnav li a {
     font-size:1.1em;
     font-weight: bold;
 }
+.code{
+    font-weight: bold;
+    color: #FAA;
+}
 
 ul.topnav li a:hover:not(.active) {background-color: #EEF;}
 
