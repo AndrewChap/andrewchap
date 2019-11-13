@@ -1,0 +1,19 @@
+<!-- HTML generated using hilite.me --><div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #008800; font-weight: bold">from</span> <span style="color: #0e84b5; font-weight: bold">mortgagetvm</span> <span style="color: #008800; font-weight: bold">import</span> MortgageComparison
+
+mortgageComparison <span style="color: #333333">=</span> MortgageComparison()
+mortgageComparison<span style="color: #333333">.</span>setDefaults(tvmRate      <span style="color: #333333">=</span> <span style="background-color: #fff0f0">&#39;8.0%&#39;</span>, <span style="color: #888888"># Market rate of return</span>
+                               houseCost    <span style="color: #333333">=</span> <span style="background-color: #fff0f0">&#39;$400,000&#39;</span>,
+                               startingCash <span style="color: #333333">=</span> <span style="background-color: #fff0f0">&#39;100%&#39;</span>)
+mortgageComparison<span style="color: #333333">.</span>addMortgage(
+                     name         <span style="color: #333333">=</span> <span style="background-color: #fff0f0">&#39;Lower down payment&#39;</span>,
+                     mortgageRate <span style="color: #333333">=</span> <span style="background-color: #fff0f0">&#39;4.0%&#39;</span>,
+                     downPayment  <span style="color: #333333">=</span> <span style="background-color: #fff0f0">&#39;20%&#39;</span>)
+mortgageComparison<span style="color: #333333">.</span>addMortgage(
+                     name         <span style="color: #333333">=</span> <span style="background-color: #fff0f0">&#39;Lower rate&#39;</span>,
+                     mortgageRate <span style="color: #333333">=</span> <span style="background-color: #fff0f0">&#39;3.5%&#39;</span>,
+                     downPayment  <span style="color: #333333">=</span> <span style="background-color: #fff0f0">&#39;50%&#39;</span>)
+
+mortgageComparison<span style="color: #333333">.</span>simulateMortgages()
+mortgageComparison<span style="color: #333333">.</span>plot(<span style="background-color: #fff0f0">&#39;loanSize&#39;</span>,<span style="background-color: #fff0f0">&#39;savings&#39;</span>,<span style="background-color: #fff0f0">&#39;netWorth&#39;</span>)
+</pre></div>
+
