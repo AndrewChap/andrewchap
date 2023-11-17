@@ -160,6 +160,19 @@ h5 {
     border-style: solid;
     border-width: 4px; 
 }
+.circle-border2 {
+    flex: 0 0 196px;
+    margin: 0px auto; /* Updated margin for centering */
+    height: 196px;
+    width: 196px;
+    border-radius: 50%;
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -o-border-radius: 50%;
+    border-style: solid;
+    border-width: 4px; 
+}
+
 .circle-container{
     width: 186px;
     height: 186px;
@@ -192,6 +205,18 @@ hr .section{
     font-family: "Open Sans", Helvetica, Arial, sans-serif;
     font-size: 12px;
     line-height: 160%;
+}
+.footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.5); /* Partially transparent black */
+    color: #fff;
+    padding: 8px;
+    font-family: "Open Sans", Helvetica, Arial, sans-serif;
+    font-size: 8px;
 }
 .page{
     padding: 16px;
