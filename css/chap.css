@@ -207,6 +207,20 @@ hr .section{
     width: 85%;
     box-sizing: border-box;
 }
+
+.page a {
+    color: #ABF;
+}
+.page a:active {
+    color: #D9D;
+}
+.page a:visited {
+    color: #D9D;
+}
+.page a:hover {
+    color: #DDF;
+}
+
 .fullpage{
     width:100%;
     margin:0 auto;
